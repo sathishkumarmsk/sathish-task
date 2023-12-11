@@ -61,7 +61,6 @@ const Card = ({title, rate}: props) => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#454341',
-    padding: 20,
     margin: 10,
     borderRadius: 10,
   },
@@ -75,6 +74,16 @@ const styles = StyleSheet.create({
   details: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  input: {
+    height: 40,
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 10,
+  },
+  errorText: {
+    color: 'red',
+    marginTop: 5,
   },
 });
 

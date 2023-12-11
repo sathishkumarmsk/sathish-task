@@ -64,6 +64,7 @@ const App: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   cardContainer: {
     zIndex: 1,
