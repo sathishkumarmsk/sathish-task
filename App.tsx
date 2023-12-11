@@ -1,10 +1,9 @@
 import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
-import {PanGestureHandler, State} from 'react-native-gesture-handler';
+import {PanGestureHandler} from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withSpring,
   useAnimatedGestureHandler,
 } from 'react-native-reanimated';
 import Card from './Card';
