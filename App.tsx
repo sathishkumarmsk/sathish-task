@@ -30,6 +30,7 @@ const App: React.FC = () => {
         data={DATA}
         renderRow={renderRow}
         onChangeOrder={nextOrder => console.log(nextOrder)}
+        separatorStyle={{display: 'none'}}
       />
     </View>
   );
@@ -38,9 +39,13 @@ const App: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'relative',
   },
   cardContainer: {
-    marginVertical: 8,
+    marginBottom: 0, // Adjust the margin as needed
+  },
+  sortableList: {
+    padding: 0, // Adjust the padding as needed
   },
 });
 

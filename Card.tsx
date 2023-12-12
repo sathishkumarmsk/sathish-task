@@ -9,7 +9,7 @@ interface props {
 const Card = ({title, rate}: props) => {
   const [discountCode, setDiscountCode] = useState('');
   const [isValid, setIsValid] = useState(true);
-
+  const [isSelected, setIsSelected] = useState(false);
   const validateDiscountCode = (code: any) => {
     return code.trim() !== '';
   };
@@ -18,40 +18,49 @@ const Card = ({title, rate}: props) => {
     setDiscountCode(text);
     setIsValid(validateDiscountCode(text));
   };
+  const handleCardPress = () => {
+    setIsSelected(!isSelected);
+  };
   return (
-    <View style={styles.card}>
+    <View
+      style={[styles.card, isSelected && styles.selectedCard]}
+      onTouchStart={handleCardPress}>
       <View style={styles.cardContent}>
         <View style={styles.details}>
-          <Text>{title}</Text>
-          <Text>${rate}/mo</Text>
+          <Text style={styles.text}>{title}</Text>
+          <Text style={styles.text}>${rate}/mo</Text>
         </View>
         <View style={styles.line} />
         <View style={styles.details}>
-          <Text>Subscription Details</Text>
-          <Text>^</Text>
+          <Text style={styles.text}>Subscription Details</Text>
+          <Text style={styles.text}>^</Text>
         </View>
         <View style={styles.line} />
         <View style={styles.details}>
-          <Text>What about my family members</Text>
-          <Text>i</Text>
+          <Text style={styles.text}>What about my family members</Text>
+          <Text style={styles.text}>i</Text>
         </View>
         <View style={styles.line} />
         <View style={styles.details}>
-          <Text>Discount Code</Text>
-          <TextInput
-            style={[styles.input, {borderColor: isValid ? 'green' : 'red'}]}
-            placeholder="Enter Discount Code"
-            onChangeText={handleTextChange}
-            value={discountCode}
-          />
-          {!isValid && (
-            <Text style={styles.errorText}>Invalid Discount Code</Text>
-          )}
+          <Text style={styles.text}>Discount Code</Text>
+          <View>
+            <TextInput
+              style={[styles.input, {borderColor: isValid ? 'green' : 'red'}]}
+              placeholder="Enter Discount Code"
+              onChangeText={handleTextChange}
+              value={discountCode}
+            />
+            {!isValid && (
+              <Text style={styles.errorText}>Invalid Discount Code</Text>
+            )}
+          </View>
         </View>
         <View style={styles.line} />
         <View style={styles.details}>
-          <Text>Are you active veteran or dependant(spouse or chaild)</Text>
-          <Text>i</Text>
+          <Text style={styles.text}>
+            Are you active veteran or dependant(spouse or chaild)
+          </Text>
+          <Text style={styles.text}>i</Text>
         </View>
       </View>
     </View>
@@ -59,8 +68,11 @@ const Card = ({title, rate}: props) => {
 };
 
 const styles = StyleSheet.create({
+  text: {
+    color: '#000',
+  },
   card: {
-    backgroundColor: '#454341',
+    backgroundColor: '#FFF',
     margin: 10,
     borderRadius: 10,
   },
@@ -84,6 +96,9 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     marginTop: 5,
+  },
+  selectedCard: {
+    backgroundColor: '#604141', // Change the color as needed
   },
 });
 
