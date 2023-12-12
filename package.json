@@ -13,7 +13,8 @@
     "react": "18.2.0",
     "react-native": "0.73.0",
     "react-native-gesture-handler": "^2.14.0",
-    "react-native-reanimated": "^2.12.0"
+    "react-native-reanimated": "^2.12.0",
+    "react-native-sortable-list": "^0.0.25"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

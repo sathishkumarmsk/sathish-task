@@ -1,12 +1,7 @@
 import React from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
-import {PanGestureHandler} from 'react-native-gesture-handler';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  useAnimatedGestureHandler,
-} from 'react-native-reanimated';
+import {View, StyleSheet} from 'react-native';
 import Card from './Card';
+import SortableList from 'react-native-sortable-list';
 
 type DataItem = {
   id: string;
@@ -21,40 +16,20 @@ const DATA: DataItem[] = [
 ];
 
 const App: React.FC = () => {
-  const translateY = useSharedValue(0);
-
-  const gestureHandler = useAnimatedGestureHandler({
-    onStart: (_, ctx) => {
-      ctx.startY = translateY.value;
-    },
-    onActive: (event, ctx) => {
-      translateY.value = ctx.startY + event.translationY;
-    },
-    onEnd: () => {},
-  });
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{translateY: translateY.value}],
-    };
-  });
-
-  const renderItem = ({item}: {item: DataItem}) => {
+  const renderRow = ({data, active}: {data: DataItem; active: boolean}) => {
     return (
-      <PanGestureHandler onGestureEvent={gestureHandler}>
-        <Animated.View style={[styles.cardContainer, animatedStyle]}>
-          <Card title={item.title} rate={item.rate} />
-        </Animated.View>
-      </PanGestureHandler>
+      <View style={styles.cardContainer}>
+        <Card title={data.title} rate={data.rate} />
+      </View>
     );
   };
 
   return (
     <View style={styles.container}>
-      <FlatList
+      <SortableList
         data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
+        renderRow={renderRow}
+        onChangeOrder={nextOrder => console.log(nextOrder)}
       />
     </View>
   );
@@ -63,10 +38,9 @@ const App: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
   },
   cardContainer: {
-    zIndex: 1,
+    marginVertical: 8,
   },
 });
 
